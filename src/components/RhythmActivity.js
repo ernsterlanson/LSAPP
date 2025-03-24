@@ -1,13 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 function RhythmActivity() {
   const [currentLevel, setCurrentLevel] = useState(0);
   const [currentMeter, setCurrentMeter] = useState('duple');
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [syllableType, setSyllableType] = useState('neutral');
+  const audioRef = useRef(null);
 
   const rhythmLevels = [
     {
       name: "Macrobeats and Microbeats",
-      meters: ["duple", "triple"]
+      meters: {
+        duple: `/audio/rhythm/level1/duple-${syllableType}.mp3`,
+        triple: `/audio/rhythm/level1/triple-${syllableType}.mp3`
+      }
     },
     {
       name: "Divisions",
@@ -21,11 +27,32 @@ function RhythmActivity() {
 
   const handleMeterChange = (meter) => {
     setCurrentMeter(meter);
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+      setIsPlaying(false);
+    }
+  };
+
+  const handlePlayPause = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
   };
 
   const handleNextLevel = () => {
     if (currentLevel < rhythmLevels.length - 1) {
       setCurrentLevel(currentLevel + 1);
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+        setIsPlaying(false);
+      }
     }
   };
 
@@ -48,11 +75,39 @@ function RhythmActivity() {
             Triple Meter
           </button>
         </div>
+        <div className="syllable-selector">
+          <button 
+            className={syllableType === 'neutral' ? 'active' : ''} 
+            onClick={() => setSyllableType('neutral')}
+          >
+            Neutral Syllables
+          </button>
+          <button 
+            className={syllableType === 'solfege' ? 'active' : ''} 
+            onClick={() => setSyllableType('solfege')}
+            disabled={true}
+          >
+            Solfege Syllables
+          </button>
+        </div>
       </div>
       
       <div className="activity-area">
-        <p>Pattern will be displayed here</p>
-        {/* Audio player will be added here */}
+        {currentLevel === 0 && (
+          <div className="audio-controls">
+            <audio
+              ref={audioRef}
+              src={rhythmLevels[0].meters[currentMeter]}
+              onEnded={() => setIsPlaying(false)}
+            />
+            <button 
+              onClick={handlePlayPause}
+              className="play-button"
+            >
+              {isPlaying ? 'Pause' : 'Play'}
+            </button>
+          </div>
+        )}
       </div>
 
       <div className="controls">

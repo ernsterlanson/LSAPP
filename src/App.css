@@ -46,4 +46,57 @@ nav a:hover {
 
 .activity-button:hover {
   background-color: #4fa8c7;
+}
+
+/* Audio controls styling */
+.audio-controls {
+  margin: 20px 0;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+}
+
+.play-button {
+  font-size: 1.2em;
+  padding: 12px 24px;
+  background-color: #61dafb;
+  color: #282c34;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.play-button:hover {
+  background-color: #4fa8c7;
+}
+
+.meter-selector {
+  margin: 20px 0;
+}
+
+.meter-selector button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  font-size: 1em;
+}
+
+.meter-selector button.active {
+  background-color: #4fa8c7;
+  color: white;
+}
+
+.syllable-selector {
+  margin: 20px 0;
+}
+
+.syllable-selector button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  font-size: 1em;
+}
+
+.syllable-selector button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 } 
