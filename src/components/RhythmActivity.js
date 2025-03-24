@@ -10,43 +10,43 @@ function RhythmActivity() {
     {
       name: "Macrobeats and Microbeats - Neutral",
       meters: {
-        duple: "/audio/rhythm/level1/duple-neutral.mp3",
-        triple: "/audio/rhythm/level1/triple-neutral.mp3"
+        duple: "/audio/rhythm/level1/duple-macro-micro-neutral.mp3",
+        triple: "/audio/rhythm/level1/triple-macro-micro-neutral.mp3"
       }
     },
     {
       name: "Macrobeats and Microbeats - Solfege",
       meters: {
-        duple: "/audio/rhythm/level1/duple-solfege.mp3",
-        triple: "/audio/rhythm/level1/triple-solfege.mp3"
+        duple: "/audio/rhythm/level1/duple-macro-micro-solfege.mp3",
+        triple: "/audio/rhythm/level1/triple-macro-micro-solfege.mp3"
       }
     },
     {
       name: "Divisions - Neutral",
       meters: {
-        duple: "/audio/rhythm/level2/duple-neutral.mp3",
-        triple: "/audio/rhythm/level2/triple-neutral.mp3"
+        duple: "/audio/rhythm/level2/duple-divisions-neutral.mp3",
+        triple: "/audio/rhythm/level2/triple-divisions-neutral.mp3"
       }
     },
     {
       name: "Divisions - Solfege",
       meters: {
-        duple: "/audio/rhythm/level2/duple-solfege.mp3",
-        triple: "/audio/rhythm/level2/triple-solfege.mp3"
+        duple: "/audio/rhythm/level2/duple-divisions-solfege.mp3",
+        triple: "/audio/rhythm/level2/triple-divisions-solfege.mp3"
       }
     },
     {
-      name: "Division/Elongation - Neutral",
+      name: "Elongations - Neutral",
       meters: {
-        duple: "/audio/rhythm/level3/duple-neutral.mp3",
-        triple: "/audio/rhythm/level3/triple-neutral.mp3"
+        duple: "/audio/rhythm/level3/duple-elongations-neutral.mp3",
+        triple: "/audio/rhythm/level3/triple-elongations-neutral.mp3"
       }
     },
     {
-      name: "Division/Elongation - Solfege",
+      name: "Elongations - Solfege",
       meters: {
-        duple: "/audio/rhythm/level3/duple-solfege.mp3",
-        triple: "/audio/rhythm/level3/triple-solfege.mp3"
+        duple: "/audio/rhythm/level3/duple-elongations-solfege.mp3",
+        triple: "/audio/rhythm/level3/triple-elongations-solfege.mp3"
       }
     }
   ];
