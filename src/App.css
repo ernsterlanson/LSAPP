@@ -99,4 +99,20 @@ nav a:hover {
 .syllable-selector button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.controls {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.controls button {
+  min-width: 120px;
+}
+
+.controls button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 } 

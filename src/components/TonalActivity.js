@@ -1,34 +1,85 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 function TonalActivity() {
   const [currentLevel, setCurrentLevel] = useState(0);
   const [currentTonality, setCurrentTonality] = useState('major');
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef(null);
 
   const tonalLevels = [
     {
-      name: "Tonal Readiness",
-      description: "First pitch exercise/resting tone exercise",
-      tonalities: ["major", "minor"]
+      name: "Tonal Readiness - Neutral",
+      description: "First pitch/resting tone exercise with neutral syllables",
+      tonalities: {
+        major: "/audio/tonal/level1/major-neutral.mp3",
+        minor: "/audio/tonal/level1/minor-neutral.mp3"
+      }
     },
     {
-      name: "Echo Pattern Tonal Sequence #1",
-      description: "Pattern echo in Major and Minor",
-      tonalities: ["major", "minor"]
+      name: "Tonal Readiness - Solfege",
+      description: "First pitch/resting tone exercise with solfege syllables",
+      tonalities: {
+        major: "/audio/tonal/level1/major-solfege.mp3",
+        minor: "/audio/tonal/level1/minor-solfege.mp3"
+      }
     },
     {
-      name: "Solfege Syllables",
-      description: "Solfege for Tonal Sequence #1",
-      tonalities: ["major", "minor"]
+      name: "Echo Pattern #1 - Neutral",
+      description: "Pattern echo with neutral syllables",
+      tonalities: {
+        major: "/audio/tonal/level2/major-neutral.mp3",
+        minor: "/audio/tonal/level2/minor-neutral.mp3"
+      }
+    },
+    {
+      name: "Echo Pattern #1 - Solfege",
+      description: "Pattern echo with solfege syllables",
+      tonalities: {
+        major: "/audio/tonal/level2/major-solfege.mp3",
+        minor: "/audio/tonal/level2/minor-solfege.mp3"
+      }
     }
   ];
 
   const handleTonalityChange = (tonality) => {
     setCurrentTonality(tonality);
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+      setIsPlaying(false);
+    }
+  };
+
+  const handlePlayPause = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
   };
 
   const handleNextLevel = () => {
     if (currentLevel < tonalLevels.length - 1) {
       setCurrentLevel(currentLevel + 1);
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+        setIsPlaying(false);
+      }
+    }
+  };
+
+  const handlePreviousLevel = () => {
+    if (currentLevel > 0) {
+      setCurrentLevel(currentLevel - 1);
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+        setIsPlaying(false);
+      }
     }
   };
 
@@ -55,12 +106,34 @@ function TonalActivity() {
       </div>
       
       <div className="activity-area">
-        <p>Pattern will be displayed here</p>
-        {/* Audio player will be added here */}
+        <div className="audio-controls">
+          <audio
+            ref={audioRef}
+            src={tonalLevels[currentLevel].tonalities[currentTonality]}
+            onEnded={() => setIsPlaying(false)}
+          />
+          <button 
+            onClick={handlePlayPause}
+            className="play-button"
+          >
+            {isPlaying ? 'Pause' : 'Play'}
+          </button>
+        </div>
       </div>
 
       <div className="controls">
-        <button onClick={handleNextLevel}>Next Level</button>
+        <button 
+          onClick={handlePreviousLevel}
+          disabled={currentLevel === 0}
+        >
+          Previous Level
+        </button>
+        <button 
+          onClick={handleNextLevel}
+          disabled={currentLevel === tonalLevels.length - 1}
+        >
+          Next Level
+        </button>
       </div>
     </div>
   );
